@@ -6,16 +6,12 @@
 
 -- ******************************** Constants *******************************
 local TITAN_DAILY_RESET_ID = "DailyReset";
-local TITAN_DAILY_RESET_VERSION = "9.1.0-1";
+local TITAN_DAILY_RESET_VERSION = "9.2.0-1";
 local _G = getfenv(0);
 local TITAN_DAILY_RESET_FREQUENCY_ELAPSED = 0;
 local updateTable = {TITAN_DAILY_RESET_ID, TITAN_PANEL_UPDATE_ALL};
 -- ******************************** Variables *******************************
-local TitanPanelDailyResetButton_ButtonAdded = nil;
-local found = nil;
-local lastMobXP, lastXP, XPGain = 0, 0, 0
 local L = LibStub("AceLocale-3.0"):GetLocale("Titan", true)
-local DDM = LibStub:GetLibrary("LibUIDropDownMenu-4.0")
 -- ******************************** Functions *******************************
 
 -- **************************************************************************
@@ -45,9 +41,9 @@ end
 function TitanPanelRightClickMenu_PrepareDailyResetMenu()
 	local info
 
-	if _G["L_UIDROPDOWNMENU_MENU_LEVEL"] == 2 then
-		if _G["L_UIDROPDOWNMENU_MENU_VALUE"] == "UpdateInterval" then
-			TitanPanelRightClickMenu_AddTitle("Update Interval", _G["L_UIDROPDOWNMENU_MENU_LEVEL"]);
+	if TitanPanelRightClickMenu_GetDropdownLevel() == 2 then
+		if TitanPanelRightClickMenu_GetDropdMenuValue() == "UpdateInterval" then
+			TitanPanelRightClickMenu_AddTitle("Update Interval", TitanPanelRightClickMenu_GetDropdownLevel())
 			intervals = { 1, 5, 10, 30, 60 }
 			for idx, interval in ipairs(intervals) do
 				info = {}
@@ -56,7 +52,7 @@ function TitanPanelRightClickMenu_PrepareDailyResetMenu()
 				info.func = function()
 					TitanSetVar(TITAN_DAILY_RESET_ID, "UpdateInterval", interval)
 				end
-				DDM:UIDropDownMenu_AddButton(info, _G["L_UIDROPDOWNMENU_MENU_LEVEL"])
+				TitanPanelRightClickMenu_AddButton(info, TitanPanelRightClickMenu_GetDropdownLevel())
 			end
 		end
 
@@ -68,7 +64,7 @@ function TitanPanelRightClickMenu_PrepareDailyResetMenu()
 	info.text = "Update Inverval"
 	info.value = "UpdateInterval"
 	info.hasArrow = 1
-	DDM:UIDropDownMenu_AddButton(info)
+	TitanPanelRightClickMenu_AddButton(info, TitanPanelRightClickMenu_GetDropdownLevel())
 end
 
 -- **************************************************************************
