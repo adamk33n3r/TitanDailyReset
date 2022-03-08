@@ -1,0 +1,10 @@
+## Interface: 90100
+## Title: Titan Panel [|cffeda55fDaily Reset|r] |cff00aa009.1.0-1|r
+## Author: adamk33n3r
+## Version: 9.1.0-1
+## Notes: This mod will display all the Currency you have on the current toon in a tool tip.  It shows the current Toons Gold amount on the Titan Panel bar.
+## RequiredDeps: Titan
+## DefaultState: Enabled
+## LoadOnDemand: 0
+## X-Child-Of: Titan
+TitanDailyReset.xml
